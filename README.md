@@ -18,10 +18,12 @@ import { dateToSafeISOString, generatePINString } from '@hyunbinseo/tools';
 
 **Browser**
 
-```js
-// Reference the following section for the full module list.
-// The major version number MUST be specified in the pathname.
-import {} from 'https://cdn.jsdelivr.net/npm/@hyunbinseo/tools@0.1/dist/index.js';
+```html
+<script type="module">
+	// Reference the following section for the full module list.
+	// The major version number MUST be specified in the pathname.
+	import {} from 'https://cdn.jsdelivr.net/npm/@hyunbinseo/tools@0.1/dist/index.js';
+</script>
 ```
 
 ## Modules
