@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsup --format cjs,esm --dts --clean && publint",
+		"version": "node cli/readme && git add README.md",
 		"prepublishOnly": "pnpm run build"
 	},
 	"devDependencies": {
