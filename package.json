@@ -1,0 +1,42 @@
+{
+	"name": "bite-size",
+	"description": "Fully typed JavaScript utilities with ESM and CJS support",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"build": "tsup --format cjs,esm --dts --clean && publint",
+		"prepublishOnly": "pnpm run build"
+	},
+	"devDependencies": {
+		"publint": "^0.2.7",
+		"tsup": "^8.0.2",
+		"typescript": "^5.4.3"
+	},
+	"tsup": {
+		"entry": [
+			"src/index.ts"
+		]
+	},
+	"exports": {
+		".": {
+			"require": "./dist/index.cjs",
+			"import": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"author": "Hyunbin Seo",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hyunbinseo/bite-size.git"
+	},
+	"bugs": {
+		"url": "https://github.com/hyunbinseo/bite-size/issues"
+	},
+	"homepage": "https://github.com/hyunbinseo/bite-size#readme"
+}
