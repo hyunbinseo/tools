@@ -1,5 +1,5 @@
 {
-	"name": "bite-size",
+	"name": "@hyunbinseo/tools",
 	"description": "Fully typed JavaScript utilities with ESM and CJS support",
 	"version": "0.0.1",
 	"type": "module",
@@ -38,10 +38,10 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hyunbinseo/bite-size.git"
+		"url": "git+https://github.com/hyunbinseo/tools.git"
 	},
 	"bugs": {
-		"url": "https://github.com/hyunbinseo/bite-size/issues"
+		"url": "https://github.com/hyunbinseo/tools/issues"
 	},
-	"homepage": "https://github.com/hyunbinseo/bite-size#readme"
+	"homepage": "https://github.com/hyunbinseo/tools#readme"
 }

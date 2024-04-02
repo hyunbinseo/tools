@@ -13,8 +13,8 @@ if (!matchedVersion) throw new Error('Major version is not found.');
 
 const readMe =
 	readFileSync('cli/README/intro.md', { encoding: 'utf8' }).replace(
-		'bite-size@version',
-		`bite-size@${matchedVersion[0]}`
+		'tools@version',
+		`tools@${matchedVersion[0]}`
 	) +
 	'\n' +
 	readFileSync('cli/README/modules.md', { encoding: 'utf8' });

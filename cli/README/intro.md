@@ -1,4 +1,4 @@
-# Bite-size
+# Tools by Hyunbin
 
 Fully typed JavaScript utilities with ESM and CJS support. [Module List](#modules)
 
@@ -7,13 +7,13 @@ Fully typed JavaScript utilities with ESM and CJS support. [Module List](#module
 **Node.js**
 
 ```shell
-npm i bite-size
-pnpm i bite-size
+npm i @hyunbinseo/tools
+pnpm i @hyunbinseo/tools
 ```
 
 ```js
 // Reference the following section for the full module list.
-import { dateToSafeISOString, generatePINString } from 'bite-size';
+import { dateToSafeISOString, generatePINString } from '@hyunbinseo/tools';
 ```
 
 **Browser**
@@ -21,5 +21,5 @@ import { dateToSafeISOString, generatePINString } from 'bite-size';
 ```js
 // Reference the following section for the full module list.
 // The major version number MUST be specified in the pathname.
-import {} from 'https://cdn.jsdelivr.net/npm/bite-size@version/dist/index.js';
+import {} from 'https://cdn.jsdelivr.net/npm/@hyunbinseo/tools@version/dist/index.js';
 ```
