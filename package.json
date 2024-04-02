@@ -8,6 +8,7 @@
 		"prepublishOnly": "pnpm run build"
 	},
 	"devDependencies": {
+		"@types/node": "^20.12.2",
 		"publint": "^0.2.7",
 		"tsup": "^8.0.2",
 		"typescript": "^5.4.3"
@@ -29,6 +30,9 @@
 	"files": [
 		"dist"
 	],
+	"engines": {
+		"node": ">=20"
+	},
 	"author": "Hyunbin Seo",
 	"license": "MIT",
 	"repository": {
