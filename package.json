@@ -4,20 +4,16 @@
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
-		"build": "tsup --format cjs,esm --dts --clean && publint",
+		"build": "tsup && publint",
 		"version": "node cli/readme && git add README.md",
-		"prepublishOnly": "pnpm run build"
+		"postversion": "git push && git push --tags",
+		"prepublishOnly": "tsup && publint"
 	},
 	"devDependencies": {
 		"@types/node": "^20.14.2",
 		"publint": "^0.2.8",
 		"tsup": "^8.1.0",
 		"typescript": "^5.4.5"
-	},
-	"tsup": {
-		"entry": [
-			"src/index.ts"
-		]
 	},
 	"exports": {
 		".": {
