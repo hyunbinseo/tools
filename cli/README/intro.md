@@ -20,8 +20,8 @@ import { dateToSafeISOString, generatePINString } from '@hyunbinseo/tools';
 
 ```html
 <script type="module">
-	// Reference the following section for the full module list.
-	// The major version number MUST be specified in the pathname.
-	import {} from 'https://cdn.jsdelivr.net/npm/@hyunbinseo/tools@version/dist/index.js';
+  // Reference the following section for the full module list.
+  // The major version number MUST be specified in the pathname.
+  import {} from 'https://cdn.jsdelivr.net/npm/@hyunbinseo/tools@version/dist/index.js';
 </script>
 ```

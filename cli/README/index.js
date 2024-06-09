@@ -2,8 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const { npm_package_version, npm_lifecycle_event } = process.env;
 
-if (npm_lifecycle_event !== 'version')
-	throw new Error('Run `pnpm version` to bump the README.');
+if (npm_lifecycle_event !== 'version') throw new Error('Run `pnpm version` to bump the README.');
 
 if (!npm_package_version) throw new TypeError('Version is not found.');
 
