@@ -19,6 +19,9 @@
 		// e.g. es2020, chrome58, firefox57, node12, node12.19.0
 		// Reference https://esbuild.github.io/api/#target
 
-		"target": "ES2020"
+		"target": "ES2020",
+		"allowJs": true,
+		"checkJs": true,
+		"outDir": "dist" // Fixes: Cannot write file '~.js' because it would overwrite input file.ts
 	}
 }
