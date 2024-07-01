@@ -1,17 +1,24 @@
 {
 	"compilerOptions": {
 		"strict": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 
-		// Target is used by tsup and is `node14` if unspecified.
-		// Reference https://tsup.egoist.dev/#target-environment
+		// tsup build target priorities:
+		// 1. `tsup.config.js` file's `target` option
+		// 2. `tsconfig.json` file's `target` value
+		// 3. `node14` if unspecified (undesirable)
+
+		// TypeScript configuration only supports ECMAScript versions.
 		// Reference https://www.typescriptlang.org/tsconfig#target
 
-		// ES2017 supports async, await, Object.values, Object,entries, etc.
-		// Reference https://en.wikipedia.org/wiki/ECMAScript_version_history
-		// Reference https://caniuse.com/sr_es8
+		// tsup configuration supports esbuild's target values.
+		// Reference https://tsup.egoist.dev/#target-environment
 
-		"target": "ES2017",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext"
+		// Note that a specific Node.js version can be specified.
+		// e.g. es2020, chrome58, firefox57, node12, node12.19.0
+		// Reference https://esbuild.github.io/api/#target
+
+		"target": "ES2020"
 	}
 }
