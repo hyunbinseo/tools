@@ -50,3 +50,20 @@ Truly random number string using the [`Crypto.getRandomValues()`](https://develo
 generatePINString(); // 270136
 generatePinString(8); // 39534786
 ```
+
+### Convert to readonly Map and Set
+
+[`ReadonlyMap` and `ReadonlySet` types](https://github.com/Microsoft/TypeScript/blob/main/src/lib/es2015.collection.d.ts) restrict write methods. (e.g. `set`, `add`)
+
+```js
+// Map<number, number>
+const map = new Map([[1, 30]]);
+
+// ReadonlyMap<number, number>
+const readonlyMap = toReadonlyMap(map);
+readonlyMap.set(1, 31); // Property 'set' does not exist
+
+// ReadonlySet<number>
+const readonlySet = toReadonlySet(new Set([5, 26]));
+readonlySet.add(3); // Property 'add' does not exist
+```
