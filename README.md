@@ -30,9 +30,19 @@ import { dateToSafeISOString, generatePINString } from '@hyunbinseo/tools';
 
 ## Modules
 
+### Date to ISO String with Timezone
+
+Returns a `YYYY-MM-DDThh:mm:ss+hh:mm` [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string. (date and time with the offset)
+
+```js
+const date = new Date('2024-05-26T00:00:00.000Z');
+dateToISOStringWithOffset(date, '-09:30'); // 2024-05-25T14:30:00-09:30
+dateToISOStringWithOffset(date, '+08:45'); // 2024-05-26T08:45:00+08:45
+```
+
 ### Date to Safe ISO String
 
-Timestamp string that can be safely used in filename, directory name, etc.
+Returns a timestamp string that can be safely used in filename, directory name, etc.
 
 ```js
 dateToSafeISOString(); // Uses the current time (e.g. 20240402T020408.248Z)
@@ -44,14 +54,14 @@ new Date('20240525T150000.000Z'); // Invalid Date
 
 ### Generate PIN String
 
-Truly random number string using the [`Crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) method.
+Returns a truly random number string using the [`Crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) method.
 
 ```js
 generatePINString(); // 270136
 generatePinString(8); // 39534786
 ```
 
-### Convert to readonly Map and Set
+### To Readonly Map and Set
 
 [`ReadonlyMap` and `ReadonlySet` types](https://github.com/Microsoft/TypeScript/blob/main/src/lib/es2015.collection.d.ts) restrict write methods. (e.g. `set`, `add`)
 
