@@ -46,7 +46,7 @@ Returns a timestamp string that can be safely used in filename, directory name, 
 
 ```js
 dateToSafeISOString(); // Uses the current time (e.g. 20240402T020408.248Z)
-dateToSafeISOString(new Date('2024-05-26T00:00+09:00')); // 20240525T150000.000Z
+dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')); // 20240525T150000.000Z
 
 // The outputted string CANNOT be used in JavaScript.
 new Date('20240525T150000.000Z'); // Invalid Date
@@ -57,8 +57,8 @@ new Date('20240525T150000.000Z'); // Invalid Date
 Returns a truly random number string using the [`Crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) method.
 
 ```js
-generatePINString(); // 270136
-generatePINString(8); // 39534786
+generatePINString(); // e.g. 270136
+generatePINString(8); // e.g. 39534786
 ```
 
 ### To Readonly Map and Set
