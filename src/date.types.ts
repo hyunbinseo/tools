@@ -19,4 +19,4 @@ type Hour =
 
 type Minute = '00' | '30' | '45';
 
-export type Timezone = `${PlusMinus}${Hour}:${Minute}`;
+export type Offset = `${PlusMinus}${Hour}:${Minute}`;

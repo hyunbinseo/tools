@@ -1,17 +1,17 @@
-/** @import {Timezone} from "./date.types.js" */
+/** @import {Offset} from "./date.types.js" */
 
-/** @param {Timezone} timezone */
-const timezoneToMinutes = (timezone) => {
-	const multiplier = Number(timezone.substring(0, 1) + '1');
-	const hour = Number(timezone.substring(1, 3));
-	const minute = Number(timezone.substring(4));
+/** @param {Offset} offset */
+const offsetToMinutes = (offset) => {
+	const multiplier = Number(offset.substring(0, 1) + '1');
+	const hour = Number(offset.substring(1, 3));
+	const minute = Number(offset.substring(4));
 	return multiplier * (60 * hour + minute);
 };
 
-/** @param {Timezone} timezone */
-export const dateToISOStringWithOffset = (date = new Date(), timezone) => {
-	const shifted = new Date(date.valueOf() + timezoneToMinutes(timezone) * 60 * 1000);
-	return shifted.toISOString().substring(0, 19) + timezone;
+/** @param {Offset} offset */
+export const dateToISOStringWithOffset = (date = new Date(), offset) => {
+	const shifted = new Date(date.valueOf() + offsetToMinutes(offset) * 60 * 1000);
+	return shifted.toISOString().substring(0, 19) + offset;
 };
 
 export const dateToSafeISOString = (date = new Date()) => date.toISOString().replace(/[-:]/g, '');
