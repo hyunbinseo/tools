@@ -15,11 +15,14 @@
 		// tsup configuration supports esbuild's target values.
 		// Reference https://tsup.egoist.dev/#target-environment
 
-		// Note that a specific Node.js version can be specified.
-		// e.g. es2020, chrome58, firefox57, node12, node12.19.0
-		// Reference https://esbuild.github.io/api/#target
+		// Node.js 20 supports all ES2023 APIs.
+		// Reference https://node.green/#ES2023
+		"target": "ES2023",
 
-		"target": "ES2020",
+		// Firefox does not support WeakMap.
+		// Reference https://caniuse.com/sr_es14
+		"lib": ["ES2022", "ES2023.Array", "DOM", "DOM.Iterable"],
+
 		"allowJs": true,
 		"checkJs": true,
 		"outDir": "dist" // Fixes: Cannot write file '~.js' because it would overwrite input file.ts
