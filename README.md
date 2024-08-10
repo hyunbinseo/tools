@@ -34,8 +34,10 @@ Returns a `YYYY-MM-DDThh:mm:ss+hh:mm` [ISO 8601](https://en.wikipedia.org/wiki/I
 
 ```js
 const date = new Date('2024-05-26T00:00:00.000Z');
-dateToISOStringWithOffset(date, '-09:30'); // 2024-05-25T14:30:00-09:30
-dateToISOStringWithOffset(date, '+08:45'); // 2024-05-26T08:45:00+08:45
+
+// 2024-05-26T08:45:00+08:45
+dateToISOStringWithOffset(date, '+08:45');
+dateToISOStringWithOffset(date, 525);
 ```
 
 ### Date to Safe ISO String
