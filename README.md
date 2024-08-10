@@ -37,7 +37,7 @@ const date = new Date('2024-05-26T00:00:00.000Z');
 
 // 2024-05-26T08:45:00+08:45
 dateToISOStringWithOffset(date, '+08:45');
-dateToISOStringWithOffset(date, 525);
+dateToISOStringWithOffset(date, -525);
 ```
 
 ### Date to Safe ISO String
