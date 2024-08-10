@@ -19,4 +19,6 @@ type Hour =
 
 type Minute = '00' | '30' | '45';
 
-export type Offset = `${PlusMinus}${Hour}:${Minute}`;
+// It is not permitted to state a zero value time offset with a negative sign.
+// Reference https://en.wikipedia.org/wiki/ISO_8601#Other_time_offset_specifications
+export type Offset = Exclude<`${PlusMinus}${Hour}:${Minute}`, '-00:00'>;
