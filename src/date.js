@@ -14,7 +14,7 @@ const offsetToMinutes = (offset) => {
 /** @param {number} offset */
 const offsetToString = (offset) => {
 	if (offset === 0) return '+00:00';
-	if (!Number.isInteger(offset)) throw new Error(`${offset} is not a integer`);
+	if (!Number.isInteger(offset)) throw new RangeError(`${offset} is not an integer`);
 	// positive if the local time zone is behind UTC
 	// negative if the local time zone is ahead of UTC
 	const sign = offset < 0 ? '+' : '-';
