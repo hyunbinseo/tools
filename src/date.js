@@ -1,7 +1,7 @@
 /** @import {OffsetString} from "./date.types.js" */
 
 /** @param {OffsetString} offset */
-const offsetToMinutes = (offset) => {
+export const utcOffsetToMinutes = (offset) => {
 	if (offset === '+00:00') return 0;
 	// positive if the local time zone is behind UTC
 	// negative if the local time zone is ahead of UTC
@@ -12,7 +12,7 @@ const offsetToMinutes = (offset) => {
 };
 
 /** @param {number} offset */
-const offsetToString = (offset) => {
+export const utcOffsetToString = (offset) => {
 	if (offset === 0) return '+00:00';
 	if (!Number.isInteger(offset)) throw new RangeError(`${offset} is not an integer`);
 	// positive if the local time zone is behind UTC
@@ -26,8 +26,8 @@ const offsetToString = (offset) => {
 
 /** @param {OffsetString | number} offset */
 export const dateToISOStringWithOffset = (date = new Date(), offset = date.getTimezoneOffset()) => {
-	const offsetMinutes = typeof offset === 'number' ? offset : offsetToMinutes(offset);
-	const offsetString = typeof offset === 'string' ? offset : offsetToString(offset);
+	const offsetMinutes = typeof offset === 'number' ? offset : utcOffsetToMinutes(offset);
+	const offsetString = typeof offset === 'string' ? offset : utcOffsetToString(offset);
 	const shifted = new Date(date.valueOf() - offsetMinutes * 60 * 1000);
 	return shifted.toISOString().substring(0, 19) + offsetString;
 };
