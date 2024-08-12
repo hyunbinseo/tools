@@ -1,9 +1,14 @@
 import { equal, throws } from 'node:assert/strict';
 import test from 'node:test';
-import { dateToISOStringWithOffset, dateToSafeISOString, generatePINString } from './index.js';
+import {
+	dateToDayWithOffset,
+	dateToISOStringWithOffset,
+	dateToSafeISOString,
+	generatePINString,
+} from './index.js';
 
 test(() => {
-	const date = new Date('2024-05-26T00:00:00.000Z');
+	const date = new Date('2024-05-26T00:00:00Z');
 
 	equal('2024-05-25T14:30:00-09:30', dateToISOStringWithOffset(date, '-09:30'));
 	equal('2024-05-25T14:30:00-09:30', dateToISOStringWithOffset(date, 570));
@@ -15,6 +20,14 @@ test(() => {
 	equal('2024-05-26T08:45:00+08:45', dateToISOStringWithOffset(date, -525));
 
 	throws(() => dateToISOStringWithOffset(date, 0.1));
+});
+
+test(() => {
+	// 2024-05-26 is Sunday
+	const date = new Date('2024-05-26T11:00:00Z');
+	equal(6, dateToDayWithOffset(date, '-12:00'));
+	equal(0, dateToDayWithOffset(date, '+00:00'));
+	equal(1, dateToDayWithOffset(date, '+14:00'));
 });
 
 test(() => {

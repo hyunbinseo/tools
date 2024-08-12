@@ -40,6 +40,17 @@ dateToISOStringWithOffset(date, '+08:45');
 dateToISOStringWithOffset(date, -525);
 ```
 
+### Date to Day of the Week with Timezone
+
+Returns a number where 0 represents Sunday.
+
+```js
+const date = new Date('2024-05-26T11:00:00Z');
+dateToDayWithOffset(date, '-12:00'); // 6 — 5/25, Saturday
+dateToDayWithOffset(date, '+00:00'); // 0 — 5/26, Sunday
+dateToDayWithOffset(date, '+14:00'); // 1 — 5/27, Monday
+```
+
 ### Date to Safe ISO String
 
 Returns a timestamp string that can be safely used in filename, directory name, etc.

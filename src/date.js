@@ -32,4 +32,10 @@ export const dateToISOStringWithOffset = (date = new Date(), offset = date.getTi
 	return shifted.toISOString().substring(0, 19) + offsetString;
 };
 
+/** @param {OffsetString | number} offset */
+export const dateToDayWithOffset = (date = new Date(), offset = date.getTimezoneOffset()) => {
+	const yyyy_mm_dd = dateToISOStringWithOffset(date, offset).substring(0, 10);
+	return new Date(`${yyyy_mm_dd}T00:00:00Z`).getUTCDay();
+};
+
 export const dateToSafeISOString = (date = new Date()) => date.toISOString().replace(/[-:]/g, '');
