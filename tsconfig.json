@@ -23,8 +23,13 @@
 		// Reference https://caniuse.com/sr_es14
 		"lib": ["ES2022", "ES2023.Array", "DOM", "DOM.Iterable"],
 
+		// JavaScript
 		"allowJs": true,
 		"checkJs": true,
-		"outDir": "dist" // Fixes: Cannot write file '~.js' because it would overwrite input file.ts
+		"outDir": "dist",
+
+		// TypeScript
+		"noEmit": true,
+		"allowImportingTsExtensions": true
 	}
 }

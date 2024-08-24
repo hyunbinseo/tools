@@ -8,7 +8,7 @@
 		"version": "node cli/readme && git add README.md",
 		"postversion": "git push && git push --tags",
 		"prepublishOnly": "tsup && publint",
-		"test": "node --test"
+		"test": "node --experimental-strip-types --test"
 	},
 	"devDependencies": {
 		"@types/node": "^20.14.9",
