@@ -7,7 +7,7 @@ import {
 	generatePINString,
 } from './index.js';
 
-test(() => {
+test('Date to ISO String with Timezone', () => {
 	const date = new Date('2024-05-26T00:00:00Z');
 
 	equal('2024-05-25T14:30:00-09:30', dateToISOStringWithOffset(date, '-09:30'));
@@ -22,7 +22,7 @@ test(() => {
 	throws(() => dateToISOStringWithOffset(date, 0.1));
 });
 
-test(() => {
+test('Date to Day of the Week with Timezone', () => {
 	// 2024-05-26 is Sunday
 	const date = new Date('2024-05-26T11:00:00Z');
 	equal(6, dateToDayWithOffset(date, '-12:00'));
@@ -30,11 +30,11 @@ test(() => {
 	equal(1, dateToDayWithOffset(date, '+14:00'));
 });
 
-test(() => {
+test('Date to Safe ISO String', () => {
 	equal(dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')), '20240525T150000.000Z');
 });
 
-test(() => {
+test('Generate PIN String', () => {
 	equal(/^\d{6}$/.test(generatePINString()), true);
 	equal(/^\d{8}$/.test(generatePINString(8)), true);
 });
