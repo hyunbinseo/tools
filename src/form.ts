@@ -1,16 +1,27 @@
-type KebabToCamelCase<S extends string> = S extends `${infer A}-${infer B}`
-	? `${A}${Capitalize<KebabToCamelCase<B>>}`
-	: S;
+type CamelCase<KebabCase extends string> = KebabCase extends `${infer A}-${infer B}`
+	? `${A}${Capitalize<CamelCase<B>>}`
+	: KebabCase;
 
-const formDataToObject = <
-	const Get extends string[],
-	const GetAll extends [string, string][],
-	ReturnType = Record<KebabToCamelCase<Get[number]>, FormDataEntryValue | null> &
-		Record<KebabToCamelCase<GetAll[number][1]>, FormDataEntryValue[] | null>,
+const kebabToCamelCase = <const K extends string>(kebabCase: K) =>
+	kebabCase.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<K>;
+
+export const formDataToObject = <
+	const GetNames extends string[],
+	const GetAllNames extends [string, string][],
+	Got = Record<CamelCase<GetNames[number]>, FormDataEntryValue | null>,
+	GotAll = Record<CamelCase<GetAllNames[number][1]>, FormDataEntryValue[] | null>,
+	ReturnType = Got & GotAll,
 >(
 	formData: FormData,
-	fields: { get: Get; getAll: GetAll },
+	names: Partial<{ get: GetNames; getAll: GetAllNames }>,
 ): ReturnType => {
-	const result: Partial<ReturnType> = {};
-	return result as ReturnType;
+	const obj: Partial<ReturnType> = {};
+
+	for (const name of names.get || []) //
+		(obj as any)[kebabToCamelCase(name)] = formData.get(name);
+
+	for (const [name, plural] of names.getAll || [])
+		(obj as any)[kebabToCamelCase(plural)] = formData.getAll(name);
+
+	return obj as ReturnType;
 };
