@@ -72,19 +72,21 @@ generatePINString(); // e.g. 270136
 generatePINString(8); // e.g. 39534786
 ```
 
-### To Readonly Map and Set
+### To Readonly Map | Set | Record
 
 [`ReadonlyMap` and `ReadonlySet` types](https://github.com/Microsoft/TypeScript/blob/main/src/lib/es2015.collection.d.ts) restrict write methods. (e.g. `set`, `add`)
 
 ```js
-// Map<number, number>
-const map = new Map([[1, 30]]);
-
 // ReadonlyMap<number, number>
-const readonlyMap = toReadonlyMap(map);
+const readonlyMap = toReadonly(new Map([[1, 30]]));
 readonlyMap.set(1, 31); // Property 'set' does not exist
 
-// ReadonlySet<number>
-const readonlySet = toReadonlySet(new Set([5, 26]));
-readonlySet.add(3); // Property 'add' does not exist
+// ReadonlySet<number | boolean>
+const readonlySet = toReadonly(new Set([5, 26, true]));
+readonlySet.add(false); // Property 'add' does not exist
+
+// Readonly<{ year: number }>;
+const readonlyRecord = toReadonly({ year: 2017 });
+// Cannot assign to 'year' because it is a read-only property.
+readonlyRecord['year'] = 2024;
 ```

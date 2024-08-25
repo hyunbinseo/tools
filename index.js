@@ -6,4 +6,4 @@ export {
 	utcOffsetToString,
 } from './src/date.ts';
 export { generatePINString } from './src/pin.js';
-export { toReadonlyMap, toReadonlySet } from './src/typescript.js';
+export { toReadonly } from './src/readonly.ts';
