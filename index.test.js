@@ -1,9 +1,10 @@
-import { equal, throws } from 'node:assert/strict';
+import { deepEqual, equal, throws } from 'node:assert/strict';
 import test from 'node:test';
 import {
 	dateToDayWithOffset,
 	dateToISOStringWithOffset,
 	dateToSafeISOString,
+	formDataToObject,
 	generatePINString,
 } from './index.js';
 
@@ -32,6 +33,21 @@ test('Date to Day of the Week with Timezone', () => {
 
 test('Date to Safe ISO String', () => {
 	equal(dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')), '20240525T150000.000Z');
+});
+
+test('FormData to Object with Types', () => {
+	const formData = new FormData();
+	formData.append('event-name', 'Touch Grass');
+	formData.append('day-index', '0');
+	formData.append('day-index', '6');
+
+	// { eventName: 'Touch Grass', dayIndexes: [ '0', '6' ] }
+	const formObject = formDataToObject(formData, {
+		get: ['event-name'],
+		getAll: [['day-index', 'day-indexes']],
+	});
+
+	deepEqual(formObject, { eventName: 'Touch Grass', dayIndexes: ['0', '6'] });
 });
 
 test('Generate PIN String', () => {

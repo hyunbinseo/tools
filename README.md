@@ -63,6 +63,37 @@ dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')); // 20240525T150000.0
 new Date('20240525T150000.000Z'); // Invalid Date
 ```
 
+### FormData to Object with Types
+
+- Converts kebab-case field names to camelCase.
+- Outputs a typed object with camelCase keys.
+
+```ts
+const formData = new FormData();
+formData.append('event-name', 'Touch Grass');
+formData.append('day-index', '0');
+formData.append('day-index', '6');
+
+formDataToObject(formData, {
+  // All field names should be in kebab-case.
+  get: ['event-name'],
+  getAll: [
+    [
+      'day-index', // field name in kebab-case
+      'day-indexes', // and its plural version
+    ],
+  ],
+});
+
+// { eventName: 'Touch Grass', dayIndexes: ['0', '6'] };
+```
+
+```ts
+type ReturnType = //
+  Record<'eventName', FormDataEntryValue | null> &
+    Record<'dayIndexes', FormDataEntryValue[] | null>;
+```
+
 ### Generate PIN String
 
 Returns a truly random number string using the [`Crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) method.
