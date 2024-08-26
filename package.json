@@ -1,7 +1,7 @@
 {
 	"name": "@hyunbinseo/tools",
 	"description": "Fully typed JavaScript utilities with ESM and CJS support",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"type": "module",
 	"scripts": {
 		"build": "tsup && publint",
