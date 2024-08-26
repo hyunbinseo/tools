@@ -48,6 +48,8 @@ test('FormData to Object with Types', () => {
 	});
 
 	deepEqual(formObject, { eventName: 'Touch Grass', dayIndexes: ['0', '6'] });
+
+	throws(() => formDataToObject(new FormData(), { get: ['eventName'] }));
 });
 
 test('Generate PIN String', () => {
