@@ -9,17 +9,24 @@ const kebabCaseToCamelCase = <const S extends string>(string: S) => {
 	return string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
 };
 
+type FormObject<
+	Get extends string[], //
+	GetAll extends [string, string][],
+> = (Get extends []
+	? Record<never, never>
+	: Record<CamelCase<Get[number]>, FormDataEntryValue | null>) &
+	(GetAll extends []
+		? Record<never, never>
+		: Record<CamelCase<GetAll[number][1]>, FormDataEntryValue[] | null>);
+
 export const formDataToObject = <
-	const GetNames extends string[],
-	const GetAllNames extends [string, string][],
-	Got = Record<CamelCase<GetNames[number]>, FormDataEntryValue | null>,
-	GotAll = Record<CamelCase<GetAllNames[number][1]>, FormDataEntryValue[] | null>,
-	ReturnType = Got & GotAll,
+	const Get extends string[] = [],
+	const GetAll extends [string, string][] = [],
 >(
 	formData: FormData,
-	names: Partial<{ get: GetNames; getAll: GetAllNames }>,
-): ReturnType => {
-	const obj: Partial<ReturnType> = {};
+	names: Partial<{ get: Get; getAll: GetAll }>,
+): FormObject<Get, GetAll> => {
+	const obj: Partial<FormObject<Get, GetAll>> = {};
 
 	for (const name of names.get || []) //
 		(obj as any)[kebabCaseToCamelCase(name)] = formData.get(name);
@@ -27,5 +34,5 @@ export const formDataToObject = <
 	for (const [name, plural] of names.getAll || [])
 		(obj as any)[kebabCaseToCamelCase(plural)] = formData.getAll(name);
 
-	return obj as ReturnType;
+	return obj as FormObject<Get, GetAll>;
 };
