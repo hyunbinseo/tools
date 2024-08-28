@@ -75,17 +75,20 @@ formData.append('day-index', '0');
 formData.append('day-index', '6');
 
 formDataToObject(formData, {
-  // All field names should be in kebab-case.
-  get: ['event-name'],
+  // kebab-case field names are converted to camelCase.
+  get: [
+    'event-name', // becomes `eventName` in the object.
+  ],
   getAll: [
-    [
-      'day-index', // field name in kebab-case
-      'day-indexes', // and its plural version
-    ],
+    // field name and its plural version.
+    // becomes `dayIndexes` in the object.
+    ['day-index', 'day-indexes'],
   ],
 });
+```
 
-// { eventName: 'Touch Grass', dayIndexes: ['0', '6'] };
+```json
+{ "eventName": "Touch Grass", "dayIndexes": ["0", "6"] }
 ```
 
 ```ts

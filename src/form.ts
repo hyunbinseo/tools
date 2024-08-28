@@ -2,12 +2,8 @@ type CamelCase<KebabCase extends string> = KebabCase extends `${infer A}-${infer
 	? `${A}${Capitalize<CamelCase<B>>}`
 	: KebabCase;
 
-const kebabCaseRegex = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
-
-const kebabCaseToCamelCase = <const S extends string>(string: S) => {
-	if (!kebabCaseRegex.test(string)) throw new Error(`field name must be in kebab-case`);
-	return string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
-};
+const toCamelCase = <const S extends string>(string: S) =>
+	string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
 
 type FormObject<
 	Get extends string[], //
@@ -29,10 +25,10 @@ export const formDataToObject = <
 	const obj: Partial<FormObject<Get, GetAll>> = {};
 
 	for (const name of names.get || []) //
-		(obj as any)[kebabCaseToCamelCase(name)] = formData.get(name);
+		(obj as any)[toCamelCase(name)] = formData.get(name);
 
 	for (const [name, plural] of names.getAll || [])
-		(obj as any)[kebabCaseToCamelCase(plural)] = formData.getAll(name);
+		(obj as any)[toCamelCase(plural)] = formData.getAll(name);
 
 	return obj as FormObject<Get, GetAll>;
 };
