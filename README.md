@@ -97,6 +97,41 @@ type ReturnType = //
     Record<'dayIndexes', FormDataEntryValue[] | null>;
 ```
 
+The output type can be narrowed using [Valibot](https://valibot.dev/) or other schema libraries.
+
+```js
+// { eventName: string; dayIndexes: number[] };
+const formObject = parse(fSchema, fObject);
+```
+
+<details>
+ <summary>Valibot Example Code</summary>
+
+```ts
+import { formDataToObject } from '@hyunbinseo/tools';
+import type { GenericSchema } from 'valibot';
+import { array, integer, object, parse, pipe, string, transform } from 'valibot';
+
+const formData = new FormData();
+formData.append('day-index', '0');
+formData.append('day-index', '6');
+
+// { dayIndexes: FormDataEntryValue[] | null }
+const fObject = formDataToObject(formData, {
+  getAll: [['day-index', 'day-indexes']],
+});
+
+const fSchema = object({
+  dayIndexes: array(pipe(string(), transform(Number), integer())),
+}) satisfies GenericSchema<typeof fObject, unknown>;
+// Ensures that the `dayIndexes` key exists in the object schema.
+
+// { dayIndexes: number[] };
+const formObject = parse(fSchema, fObject);
+```
+
+</details>
+
 ### Generate PIN String
 
 Returns a truly random number string using the [`Crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) method.
