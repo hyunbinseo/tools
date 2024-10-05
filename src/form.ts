@@ -5,7 +5,7 @@ type CamelCase<KebabCase extends string> = KebabCase extends `${infer A}-${infer
 const toCamelCase = <const S extends string>(string: S) =>
 	string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
 
-type FormObject<
+type CamelCasedObject<
 	Get extends string[], //
 	GetAll extends [string, string][],
 > = (Get extends []
@@ -15,20 +15,20 @@ type FormObject<
 		? Record<never, never>
 		: Record<CamelCase<GetAll[number][1]>, FormDataEntryValue[] | null>);
 
-export const formDataToObject = <
+export const toCamelCasedObject = <
 	const Get extends string[] = [],
 	const GetAll extends [string, string][] = [],
 >(
-	formData: FormData,
+	data: FormData | URLSearchParams,
 	names: Partial<{ get: Get; getAll: GetAll }>,
-): FormObject<Get, GetAll> => {
-	const obj: Partial<FormObject<Get, GetAll>> = {};
+): CamelCasedObject<Get, GetAll> => {
+	const obj: Partial<CamelCasedObject<Get, GetAll>> = {};
 
 	for (const name of names.get || []) //
-		(obj as any)[toCamelCase(name)] = formData.get(name);
+		(obj as any)[toCamelCase(name)] = data.get(name);
 
 	for (const [name, plural] of names.getAll || [])
-		(obj as any)[toCamelCase(plural)] = formData.getAll(name);
+		(obj as any)[toCamelCase(plural)] = data.getAll(name);
 
-	return obj as FormObject<Get, GetAll>;
+	return obj as CamelCasedObject<Get, GetAll>;
 };
