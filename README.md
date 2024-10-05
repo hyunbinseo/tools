@@ -63,13 +63,13 @@ dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')); // 20240525T150000.0
 new Date('20240525T150000.000Z'); // Invalid Date
 ```
 
-### FormData to Object with Types
+### FormData / URLSearchParams to Object
 
 - Converts kebab-case field names to camelCase.
 - Outputs a typed object with camelCase keys.
 
 ```ts
-const formData = new FormData();
+const formData = new FormData(); // new URLSearchParams()
 formData.append('event-name', 'Touch Grass');
 formData.append('day-index', '0');
 formData.append('day-index', '6');

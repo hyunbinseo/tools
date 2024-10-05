@@ -35,7 +35,7 @@ test('Date to Safe ISO String', () => {
 	equal(dateToSafeISOString(new Date('2024-05-26T00:00:00+09:00')), '20240525T150000.000Z');
 });
 
-test('FormData to Object with Types', () => {
+test('FormData / URLSearchParams to Object', () => {
 	const formData = new FormData();
 	formData.append('event-name', 'Touch Grass');
 	formData.append('day-index', '0');
