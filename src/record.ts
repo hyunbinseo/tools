@@ -2,7 +2,7 @@
 
 type DeepNonNullable<T> = { [P in keyof T]-?: NonNullable<T[P]> };
 
-export const valuesAreNonNullable = <T extends Record<string, unknown>, K extends Array<keyof T>>(
+export const hasNonNullableValues = <T extends Record<string, unknown>, K extends Array<keyof T>>(
 	obj: T,
 	keys: K,
 ): obj is Omit<T, K[number]> & Pick<DeepNonNullable<T>, K[number]> => {

@@ -11,4 +11,4 @@ export {
 } from './src/date.ts';
 export { generatePINString } from './src/pin.js';
 export { toReadonly } from './src/readonly.ts';
-export { valuesAreNonNullable } from './src/record.ts';
+export { hasNonNullableValues } from './src/record.ts';

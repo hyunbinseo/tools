@@ -173,6 +173,6 @@ if (!review.rating) throw new Error();
 review; // { rating?: number }
 review.rating; // number
 
-if (!valuesAreNonNullable(review, ['rating'])) throw new Error();
+if (!hasNonNullableValues(review, ['rating'])) throw new Error();
 review; // { rating: number }
 ```
