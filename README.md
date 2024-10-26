@@ -163,3 +163,16 @@ const readonlyRecord = toReadonly({ year: 2017 });
 // Cannot assign to 'year' because it is a read-only property.
 readonlyRecord['year'] = 2024;
 ```
+
+### Deep-NonNullable Record
+
+```ts
+const review: { rating?: number } = {};
+
+if (!review.rating) throw new Error();
+review; // { rating?: number }
+review.rating; // number
+
+if (!valuesAreNonNullable(review, ['rating'])) throw new Error();
+review; // { rating: number }
+```
