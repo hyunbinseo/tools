@@ -11,10 +11,10 @@
 		"test": "node --experimental-strip-types --test"
 	},
 	"devDependencies": {
-		"@types/node": "^20.16.10",
-		"publint": "^0.2.11",
-		"tsup": "^8.3.0",
-		"typescript": "^5.6.2"
+		"@types/node": "^22.10.2",
+		"publint": "^0.2.12",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.2"
 	},
 	"exports": {
 		".": {
