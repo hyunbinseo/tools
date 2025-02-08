@@ -4,17 +4,15 @@
 	"version": "0.3.5",
 	"type": "module",
 	"scripts": {
-		"build": "tsup && publint",
-		"version": "node cli/readme && git add README.md",
+		"prepack": "tsup && publint",
 		"postversion": "git push && git push --tags",
-		"prepublishOnly": "tsup && publint",
-		"test": "node --experimental-strip-types --test"
+		"version": "node cli/readme && git add README.md"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.2",
-		"publint": "^0.2.12",
-		"tsup": "^8.3.5",
-		"typescript": "^5.7.2"
+		"@types/node": "^22.13.1",
+		"publint": "^0.3.4",
+		"tsup": "^8.3.6",
+		"typescript": "^5.7.3"
 	},
 	"exports": {
 		".": {
@@ -41,5 +39,5 @@
 		"url": "https://github.com/hyunbinseo/tools/issues"
 	},
 	"homepage": "https://github.com/hyunbinseo/tools#readme",
-	"packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca"
+	"packageManager": "pnpm@10.2.1+sha512.398035c7bd696d0ba0b10a688ed558285329d27ea994804a52bad9167d8e3a72bcb993f9699585d3ca25779ac64949ef422757a6c31102c12ab932e5cbe5cc92"
 }
