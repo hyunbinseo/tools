@@ -6,7 +6,7 @@ import {
 	dateToSafeISOString,
 	formDataToObject,
 	generatePINString,
-} from './index.js';
+} from './index.ts';
 
 test('Date to ISO String with Timezone', () => {
 	const date = new Date('2024-05-26T00:00:00Z');

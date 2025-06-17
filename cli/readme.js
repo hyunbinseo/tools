@@ -1,5 +1,9 @@
+import { equal } from 'node:assert';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { env } from 'node:process';
+import { join } from 'node:path';
+import { cwd, env } from 'node:process';
+
+equal(cwd(), join(import.meta.dirname, '..'));
 
 const { npm_package_version: version } = env;
 if (!version) throw new TypeError('npm_package_version is not defined.');
