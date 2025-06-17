@@ -1,7 +1,7 @@
 {
 	"name": "@hyunbinseo/tools",
 	"description": "Fully typed JavaScript utilities with ESM and CJS support",
-	"version": "0.3.5",
+	"version": "0.3.6",
 	"engines": {
 		"node": ">=20"
 	},
