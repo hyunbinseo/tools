@@ -4,15 +4,13 @@ type NullableKeys<T> = {
 	[K in keyof T]: null extends T[K] ? K : undefined extends T[K] ? K : never;
 }[keyof T];
 
+type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
 export const hasNonNullableValues = <
 	T extends Record<string, unknown>, //
 	K extends NullableKeys<T>,
 >(
 	obj: T,
 	keys: K[],
-): obj is T & { [P in K]: NonNullable<T[P]> } => {
-	for (const key of keys) {
-		if (obj[key] === null || obj[key] === undefined) return false;
-	}
-	return true;
-};
+): obj is Prettify<T & { [P in K]: NonNullable<T[P]> }> =>
+	keys.every((key) => obj[key] !== null && obj[key] !== undefined);

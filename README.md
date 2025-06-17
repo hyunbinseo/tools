@@ -167,12 +167,12 @@ readonlyRecord['year'] = 2024;
 ### Deep-NonNullable Record
 
 ```ts
-const review: { rating?: number } = {};
+const record: { a?: string; b?: number } = { a: 'Hello!' };
 
-if (!review.rating) throw new Error();
-review; // { rating?: number }
-review.rating; // number
+if (!record.a) throw new Error();
+record; //  { a?: string; b?: number };
+record.a; // string
 
-if (!hasNonNullableValues(review, ['rating'])) throw new Error();
-review; // { rating: number }
+if (!hasNonNullableValues(record, ['a'])) throw new Error();
+record; // { a: string; b?: number | undefined }
 ```

@@ -6,6 +6,7 @@ import {
 	dateToSafeISOString,
 	formDataToObject,
 	generatePINString,
+	hasNonNullableValues,
 } from './index.ts';
 
 test('Date to ISO String with Timezone', () => {
@@ -53,4 +54,15 @@ test('FormData / URLSearchParams to Object', () => {
 test('Generate PIN String', () => {
 	equal(/^\d{6}$/.test(generatePINString()), true);
 	equal(/^\d{8}$/.test(generatePINString(8)), true);
+});
+
+test('Deep-NonNullable Record', () => {
+	const record: { a?: string; b?: number } = { a: 'Hello!' };
+
+	if (!record.a) throw new Error();
+	record; //  { a?: string; b?: number };
+	record.a; // string
+
+	if (!hasNonNullableValues(record, ['a'])) throw new Error();
+	record; // { a: string; b?: number | undefined }
 });
