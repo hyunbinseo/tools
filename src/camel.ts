@@ -5,15 +5,19 @@ type CamelCase<KebabCase extends string> = KebabCase extends `${infer A}-${infer
 const toCamelCase = <const S extends string>(string: S) =>
 	string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
 
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+
 type CamelCasedObject<
 	Get extends string[], //
 	GetAll extends [string, string][],
-> = (Get extends []
-	? Record<never, never>
-	: Record<CamelCase<Get[number]>, FormDataEntryValue | null>) &
-	(GetAll extends []
+> = Expand<
+	(Get extends []
 		? Record<never, never>
-		: Record<CamelCase<GetAll[number][1]>, FormDataEntryValue[] | null>);
+		: Record<CamelCase<Get[number]>, FormDataEntryValue | null>) &
+		(GetAll extends []
+			? Record<never, never>
+			: Record<CamelCase<GetAll[number][1]>, FormDataEntryValue[] | null>)
+>;
 
 export const toCamelCasedObject = <
 	const Get extends string[] = [],
