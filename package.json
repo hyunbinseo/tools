@@ -8,8 +8,8 @@
 	"type": "module",
 	"scripts": {
 		"prepack": "tsup && publint",
-		"postversion": "git push && git push --tags",
-		"version": "node --test && node cli/readme && git add README.md"
+		"version": "node --test && node cli/version.ts && git add README.md",
+		"postversion": "git push && git push --tags && node cli/postversion.ts"
 	},
 	"devDependencies": {
 		"@types/node": "^20.19.13",
