@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { env } from 'node:process';
 
 const path = join(import.meta.dirname, '../README.md');
-existsSync(path);
+if (!existsSync(path)) throw new Error('readme file does not exist');
 
 const { npm_package_version: version } = env;
 if (!version) throw new Error('npm_package_version is not set');
