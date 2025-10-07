@@ -1,6 +1,7 @@
 import { deepEqual, equal, throws } from 'node:assert/strict';
 import test from 'node:test';
 import {
+	ExtendedDate,
 	dateToDayWithOffset,
 	dateToISOStringWithOffset,
 	dateToSafeISOString,
@@ -8,6 +9,26 @@ import {
 	generatePINString,
 	hasNonNullableValues,
 } from './index.ts';
+
+test('Extended Date Class', () => {
+	// 2024-05-26 is Sunday(0)
+	const date = new Date('2024-05-26T00:00:00Z');
+	const extendedDate = new ExtendedDate(date);
+
+	equal(6, extendedDate.getDay('-09:30'));
+	equal(0, extendedDate.getDay('+09:00'));
+
+	equal('2024-05-26T00:00:00.000Z', extendedDate.toISOString());
+	equal('2024-05-26T00:00:00+00:00', extendedDate.toISOString(0));
+	equal('2024-05-26T00:00:00+00:00', extendedDate.toISOString('+00:00'));
+	equal('2024-05-25T14:30:00-09:30', extendedDate.toISOString('-09:30'));
+
+	deepEqual(extendedDate.format('-09:30'), {
+		'yyyy-mm-dd': '2024-05-25',
+		'hh:mm:ss': '14:30:00',
+		'hh:mm': '14:30',
+	});
+});
 
 test('Date to ISO String with Timezone', () => {
 	const date = new Date('2024-05-26T00:00:00Z');
@@ -25,7 +46,7 @@ test('Date to ISO String with Timezone', () => {
 });
 
 test('Date to Day of the Week with Timezone', () => {
-	// 2024-05-26 is Sunday
+	// 2024-05-26 is Sunday(0)
 	const date = new Date('2024-05-26T11:00:00Z');
 	equal(6, dateToDayWithOffset(date, '-12:00'));
 	equal(0, dateToDayWithOffset(date, '+00:00'));

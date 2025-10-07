@@ -6,6 +6,7 @@ export {
 	dateToDayWithOffset,
 	dateToISOStringWithOffset,
 	dateToSafeISOString,
+	ExtendedDate,
 	utcOffsetToMinutes,
 	utcOffsetToString,
 } from './src/date.ts';

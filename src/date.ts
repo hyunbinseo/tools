@@ -27,7 +27,7 @@ export const utcOffsetToMinutes = (offset: OffsetString) => {
 	if (offset === '+00:00') return 0;
 	// positive if the local time zone is behind UTC
 	// negative if the local time zone is ahead of UTC
-	const multiplier = -Number(offset.substring(0, 1) + '1');
+	const multiplier = offset[0] === '+' ? -1 : 1;
 	const hour = Number(offset.substring(1, 3));
 	const minute = Number(offset.substring(4));
 	return multiplier * (60 * hour + minute);
@@ -59,8 +59,33 @@ export const dateToDayWithOffset = (
 	date = new Date(),
 	offset: OffsetString | number = date.getTimezoneOffset(),
 ) => {
-	const yyyy_mm_dd = dateToISOStringWithOffset(date, offset).substring(0, 10);
-	return new Date(`${yyyy_mm_dd}T00:00:00Z`).getUTCDay();
+	const offsetMinutes = typeof offset === 'number' ? offset : utcOffsetToMinutes(offset);
+	const shifted = new Date(date.valueOf() - offsetMinutes * 60 * 1000);
+	return shifted.getUTCDay();
 };
 
 export const dateToSafeISOString = (date = new Date()) => date.toISOString().replace(/[-:]/g, '');
+
+export class ExtendedDate extends Date {
+	getDay(offset?: OffsetString | number) {
+		return typeof offset === 'undefined' //
+			? super.getDay()
+			: dateToDayWithOffset(this, offset);
+	}
+	toISOString(offset?: OffsetString | number) {
+		return typeof offset === 'undefined'
+			? super.toISOString()
+			: dateToISOStringWithOffset(this, offset);
+	}
+	toSafeISOString() {
+		return dateToSafeISOString(this);
+	}
+	format(offset: OffsetString | number) {
+		const isoString = dateToISOStringWithOffset(this, offset);
+		return {
+			'yyyy-mm-dd': isoString.substring(0, 10),
+			'hh:mm:ss': isoString.substring(11, 19),
+			'hh:mm': isoString.substring(11, 16),
+		};
+	}
+}
