@@ -1,16 +1,19 @@
-# https://docs.npmjs.com/generating-provenance-statements#example-github-actions-workflow
-# https://pnpm.io/continuous-integration#github-actions
+# https://docs.npmjs.com/trusted-publishers
+# https://pnpm.io/continuous-integration
 
-name: Publish Package to npmjs
+name: Publish Package
+
 on:
   release:
     types: [created]
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -21,6 +24,3 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
