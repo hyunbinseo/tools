@@ -112,12 +112,12 @@ export class ExtendedDate extends Date {
 	toSafeISOString() {
 		return dateToSafeISOString(this);
 	}
-	format(offset: OffsetString | number) {
-		const isoString = dateToISOStringWithOffset(this, offset);
-		return {
-			'yyyy-mm-dd': isoString.substring(0, 10),
-			'hh:mm:ss': isoString.substring(11, 19),
-			'hh:mm': isoString.substring(11, 16),
-		};
-	}
+	format = {
+		'yyyy-mm-dd': (offset?: OffsetString | number) =>
+			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(0, 10),
+		'hh:mm:ss': (offset?: OffsetString | number) =>
+			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(11, 19),
+		'hh:mm': (offset?: OffsetString | number) =>
+			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(11, 16),
+	};
 }
