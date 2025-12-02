@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"strict": true,
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 
@@ -14,14 +13,19 @@
 			"ES2023"
 		],
 
-		// JavaScript
-		"allowJs": true,
-		"checkJs": true,
-		"outDir": "dist",
-
-		// TypeScript
 		"noEmit": true,
 		"skipLibCheck": true,
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false
 	}
 }

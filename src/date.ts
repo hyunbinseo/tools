@@ -69,42 +69,42 @@ export const dateToDayWithOffset = (
 export const dateToSafeISOString = (date = new Date()) => date.toISOString().replace(/[-:]/g, '');
 
 export class ExtendedDate extends Date {
-	getDay(offset?: OffsetString | number) {
+	override getDay(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getDay()
 			: getShifted(this, offset).getUTCDay();
 	}
-	getFullYear(offset?: OffsetString | number) {
+	override getFullYear(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getFullYear()
 			: getShifted(this, offset).getUTCFullYear();
 	}
-	getMonth(offset?: OffsetString | number) {
+	override getMonth(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getMonth()
 			: getShifted(this, offset).getUTCMonth();
 	}
-	getDate(offset?: OffsetString | number) {
+	override getDate(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getDate()
 			: getShifted(this, offset).getUTCDate();
 	}
-	getHours(offset?: OffsetString | number) {
+	override getHours(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getHours()
 			: getShifted(this, offset).getUTCHours();
 	}
-	getMinutes(offset?: OffsetString | number) {
+	override getMinutes(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getMinutes()
 			: getShifted(this, offset).getUTCMinutes();
 	}
-	getSeconds(offset?: OffsetString | number) {
+	override getSeconds(offset?: OffsetString | number) {
 		return typeof offset === 'undefined' //
 			? super.getSeconds()
 			: getShifted(this, offset).getUTCSeconds();
 	}
-	toISOString(offset?: OffsetString | number) {
+	override toISOString(offset?: OffsetString | number) {
 		return typeof offset === 'undefined'
 			? super.toISOString()
 			: dateToISOStringWithOffset(this, offset);

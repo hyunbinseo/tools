@@ -3,7 +3,7 @@ type CamelCase<KebabCase extends string> = KebabCase extends `${infer A}-${infer
 	: KebabCase;
 
 const toCamelCase = <const S extends string>(string: S) =>
-	string.replace(/-./g, (match) => match[1].toUpperCase()) as CamelCase<S>;
+	string.replace(/-./g, (match) => match[1]!.toUpperCase()) as CamelCase<S>;
 
 type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
