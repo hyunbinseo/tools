@@ -4,24 +4,15 @@
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 
-		// tsup build target priorities:
-		// 1. `tsup.config.js` file's `target` option
-		// 2. `tsconfig.json` file's `target` value
-		// 3. `node14` if unspecified (undesirable)
-
-		// TypeScript configuration only supports ECMAScript versions.
-		// Reference https://www.typescriptlang.org/tsconfig#target
-
-		// tsup configuration supports esbuild's target values.
-		// Reference https://tsup.egoist.dev/#target-environment
-
-		// Node.js 20 supports all ES2023 APIs.
-		// Reference https://node.green/#ES2023
-		"target": "ES2023",
-
-		// Firefox does not support WeakMap.
-		// Reference https://caniuse.com/sr_es14
-		"lib": ["ES2022", "ES2023.Array", "DOM", "DOM.Iterable"],
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			// Node.js 20 supports ES2023 APIs
+			// Firefox does not support WeakMap
+			// See https://node.green/#ES2023
+			// See https://caniuse.com/sr-es14
+			"ES2023"
+		],
 
 		// JavaScript
 		"allowJs": true,
@@ -30,6 +21,7 @@
 
 		// TypeScript
 		"noEmit": true,
+		"skipLibCheck": true,
 		"allowImportingTsExtensions": true
 	}
 }
