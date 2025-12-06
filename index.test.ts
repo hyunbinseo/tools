@@ -23,6 +23,8 @@ test('Extended Date Class', () => {
 	equal('2024-05-26T00:00:00+00:00', extendedDate.toISOString('+00:00'));
 	equal('2024-05-25T14:30:00-09:30', extendedDate.toISOString('-09:30'));
 
+	equal(extendedDate.format['yyyy-mm-dd hh:mm:ss']('+09:00'), '2024-05-26 09:00:00');
+	equal(extendedDate.format['yyyy-mm-dd hh:mm']('+09:00'), '2024-05-26 09:00');
 	equal(extendedDate.format['yyyy-mm-dd']('-09:30'), '2024-05-25');
 	equal(extendedDate.format['hh:mm:ss']('-09:30'), '14:30:00');
 	equal(extendedDate.format['hh:mm']('-09:30'), '14:30');

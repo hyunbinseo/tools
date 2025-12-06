@@ -118,11 +118,12 @@ export class ExtendedDate extends Date {
 		return dateToSafeISOString(this);
 	}
 	format = {
-		'yyyy-mm-dd': (offset?: OffsetString | number) =>
-			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(0, 10),
-		'hh:mm:ss': (offset?: OffsetString | number) =>
-			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(11, 19),
-		'hh:mm': (offset?: OffsetString | number) =>
-			dateToISOStringWithOffset(this, offset ?? this.getTimezoneOffset()).substring(11, 16),
+		'yyyy-mm-dd hh:mm:ss': (offset?: OffsetString | number) =>
+			this.toISOString(offset).substring(0, 19).replace('T', ' '),
+		'yyyy-mm-dd hh:mm': (offset?: OffsetString | number) =>
+			this.toISOString(offset).substring(0, 16).replace('T', ' '),
+		'yyyy-mm-dd': (offset?: OffsetString | number) => this.toISOString(offset).substring(0, 10),
+		'hh:mm:ss': (offset?: OffsetString | number) => this.toISOString(offset).substring(11, 19),
+		'hh:mm': (offset?: OffsetString | number) => this.toISOString(offset).substring(11, 16),
 	};
 }
