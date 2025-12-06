@@ -1,10 +1,12 @@
 export const generatePINString = (length = 6) => {
-	let pin = '';
+	if (!Number.isInteger(length) || length <= 0) throw new RangeError();
 
-	while (pin.length < length) {
+	const digits: string[] = [];
+
+	while (digits.length < length) {
 		const [randomValue] = crypto.getRandomValues(new Uint32Array(1));
-		pin = pin + randomValue!.toString(); // 0 ~ 4294967295 (2^32-1)
+		digits.push((randomValue! % 10).toString());
 	}
 
-	return pin.substring(0, length);
+	return digits.join('');
 };
