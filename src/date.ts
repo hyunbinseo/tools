@@ -20,8 +20,12 @@ type Hour =
 type Minute = '00' | '30' | '45';
 
 // It is not permitted to state a zero value time offset with a negative sign.
-// Reference https://en.wikipedia.org/wiki/ISO_8601#Other_time_offset_specifications
+// See https://en.wikipedia.org/wiki/ISO_8601#Other_time_offset_specifications
 type OffsetString = Exclude<`${PlusMinus}${Hour}:${Minute}`, '-00:00'>;
+
+const isValidOffsetMinutes = (offset: number) => {
+	return Number.isInteger(offset) && offset >= -720 && offset <= 840;
+};
 
 export const utcOffsetToMinutes = (offset: OffsetString) => {
 	if (offset === '+00:00') return 0;
@@ -35,7 +39,7 @@ export const utcOffsetToMinutes = (offset: OffsetString) => {
 
 export const utcOffsetToString = (offset: number) => {
 	if (offset === 0) return '+00:00';
-	if (!Number.isInteger(offset)) throw new RangeError(`${offset} is not an integer`);
+	if (!isValidOffsetMinutes(offset)) throw new RangeError();
 	// positive if the local time zone is behind UTC
 	// negative if the local time zone is ahead of UTC
 	const sign = offset < 0 ? '+' : '-';
@@ -46,6 +50,7 @@ export const utcOffsetToString = (offset: number) => {
 };
 
 const getShifted = (date: Date, offset: OffsetString | number) => {
+	if (typeof offset === 'number' && !isValidOffsetMinutes(offset)) throw new RangeError();
 	const offsetMinutes = typeof offset === 'number' ? offset : utcOffsetToMinutes(offset);
 	return new Date(date.valueOf() - offsetMinutes * 60 * 1000);
 };

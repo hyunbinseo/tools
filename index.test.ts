@@ -72,7 +72,11 @@ test('FormData / URLSearchParams to Object', () => {
 
 test('Generate PIN String', () => {
 	equal(/^\d{6}$/.test(generatePINString()), true);
-	equal(/^\d{8}$/.test(generatePINString(8)), true);
+	equal(/^\d{1}$/.test(generatePINString(1)), true);
+
+	throws(() => generatePINString(0), RangeError);
+	throws(() => generatePINString(-1), RangeError);
+	throws(() => generatePINString(5.5), RangeError);
 });
 
 test('Deep-NonNullable Record', () => {
