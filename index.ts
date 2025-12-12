@@ -1,8 +1,4 @@
 export {
-	toCamelCasedObject as formDataToObject,
-	toCamelCasedObject as urlSearchParamsToObject,
-} from './src/camel.ts';
-export {
 	dateToDayWithOffset,
 	dateToISOStringWithOffset,
 	dateToSafeISOString,
