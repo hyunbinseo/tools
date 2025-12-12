@@ -3,7 +3,7 @@
 	"description": "Fully typed JavaScript utilities with ESM and CJS support",
 	"version": "0.3.9",
 	"engines": {
-		"node": ">=20"
+		"node": ">=20.19"
 	},
 	"type": "module",
 	"scripts": {
@@ -14,19 +14,14 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@types/node": "^20.19.20",
-		"prettier": "^3.7.3",
-		"publint": "^0.3.15",
-		"tsdown": "^0.17.0-beta.5",
+		"@types/node": "^20.19.26",
+		"prettier": "^3.7.4",
+		"publint": "^0.3.16",
+		"tsdown": "^0.17.3",
 		"typescript": "^5.9.3"
 	},
 	"sideEffects": false,
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		}
-	},
+	"exports": "./dist/index.js",
 	"files": [
 		"dist"
 	],
